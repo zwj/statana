@@ -1,0 +1,47 @@
+import modules ;
+local root = [ modules.peek : LOG_HOME ] ; 
+local home = [ modules.peek : HOME ] ; 
+
+dependentLib =
+			;
+			
+project improve
+		: usage-requirements <library>../../libraries/$(dependentLib)
+		;
+
+LibSource = 
+			exception/exception_handler.cpp
+			utility/utility.cpp
+			time/performance_time_unix.cpp 
+			design_by_contract/dbc.cpp
+			status_machine/status_machine.cpp
+			utility/args_analyze.cpp	
+	        net/url_parser.cpp
+			;
+TestSource = 			
+			test/status_machine_test.cpp
+			test/rule_express_test.cpp
+			test/test_main.cpp
+			test/args_analyze_test.cpp
+			test/url_parser_test.cpp
+			;
+			
+
+
+ lib improve 
+	: ../$(LibSource)
+    : <link>static
+	;
+
+libSrc =
+	//cppunit
+	//regex
+	;	
+exe improve_test 
+	: ../$(TestSource) ../../../libraries/$(libSrc) improve     
+    : <link>static
+	;
+	
+	
+stage dist : improve_test : <location>$(root)/bin/ ;
+

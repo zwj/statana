@@ -1,0 +1,68 @@
+<root>
+	<data_source path="/home/zwj/logana/data" file="*.log">	
+	</data_source>		
+	<task count = "50000">	
+		<activity type="LOADDATA" output="source" >	
+				<!--	
+				<filter>
+						<rule type = "CMP" exp="TIME GE 2004-5-9 11:20:0" />	
+				</filter>		
+				-->
+		</activity>	
+		<activity type="COLLECT" input="right_data"  	unique="FILE"  			output="file_pv" /> 
+		<activity type="COLLECT" input="left_data"  	unique="ARG.page" 		output="left_page" /> 
+		<activity type="COLLECT" input="right_data"  	unique="ARG.lang" 		output="search_lang" /> 
+		<activity type="COLLECT" input="right_data"  	unique="ARG.site" 		output="site_search" /> 
+		<activity type="COLLECT" input="music_data"  	unique="ARG.mp3_type" 	output="music_type" /> 
+		<activity type="COLLECT" input="music_data"  	unique="ARG.mp3_singer" output="music_singer" /> 
+		<activity type="COLLECT" input="music_data"  	unique="ARG.mp3_disc" 	output="music_disc" /> 
+		<activity type="COLLECT" input="right_data"  	unique="ARG.argse+ARG.p"	output="channel_kword" /> 
+		<activity type="COLLECT" input="left_data"   	unique="ARG.fr" 		output="left_result" /> 
+		<activity type="COLLECT" input="right_data"  	unique="ARG.argse" 		output="channel_pv" /> 
+		<activity type="COLLECT" input="bookmark_data"  unique="ARG.argse" 		output="bookmark_channel_pv" /> 
+		<activity type="COLLECT" input="right_data"  	unique="ARG.args+ARG.page" output="channel_page" /> 
+		<activity type="COLLECT" input="life_data"  	unique="IP" 			output="life_ip" /> 
+		<activity type="COLLECT" input="union_data"  	unique="ARG.pid+IP" 	output="unit_pid" /> 
+		<activity type="COLLECT" input="right_data"  	unique="ARG.fw" 		output="union_from" /> 
+		<activity type="COLLECT" input="music_more_data"  unique="FILE" 		output="music_more" /> 
+		<activity type="COLLECT" input="left_data"  	unique="ARG.p" 			output="left_kword" /> 
+		<activity type="COLLECT" input="source"  		unique="IP+FILE" 			output="file_ip" /> 
+		
+		<activity  type="CLASSIFY"  input ="source" output ="right_data" >
+				<rule  type = "CMP" exp="FILE EQ right.htm"/>
+		</activity>
+		
+		<activity  type="CLASSIFY"  input ="right_data" output ="bookmark_data" >
+				<rule  type = "CMP" exp="ARG.fw EQ bookmark"/>
+		</activity>
+
+		<activity  type="CLASSIFY"  input ="source" output ="music_more_data" >
+				<rule  type = "OR" >
+					<rule  type = "CMP" exp="FILE EQ music_more.htm"/>
+					<rule  type = "CMP" exp="FILE EQ music_lyric.htm"/>
+				</rule>
+		</activity>
+
+		<activity  type="CLASSIFY"  input = "source" output="left_data" >
+				<rule  type = "OR" >
+					<rule  type = "CMP" exp="FILE EQ left.htm"/>
+					<rule  type = "CMP" exp="FILE EQ msn_left.htm"/>
+				</rule>
+		</activity>
+
+		<activity  type="CLASSIFY"  input = "right_data" output="music_data" >
+				<rule  type = "CMP" exp="ARG.argse EQ music3721"/>
+		</activity>
+		<activity  type="CLASSIFY"  input = "right_data" output ="life_data" >
+				<rule  type = "CMP" exp="ARG.argse EQ yellowpage"/>
+		</activity>
+
+		<activity  type="CLASSIFY"  input = "right_data" output = "union_data" >
+				<rule  type = "AND" >
+					<rule  type = "CMP" exp="ARG.fw EQ union"/>
+					<rule  type = "CMP" exp="ADDI.x EQ CT"/>
+				</rule>
+		</activity>
+
+	</task>
+</root>

@@ -1,0 +1,20 @@
+<root>
+	<data_source path="data\*.txt">	
+	</data_source>		
+	<task>	
+		<activity type="loaddata" id="0" count = "10000">	
+				<filter_rule type="and">	
+					<filter_rule  type="or">
+						<filter_rule  exp = "ip L 192.168.0.1 " />
+						<filter_rule  exp = "ip J 192.168.0.100" />
+					</filter_rule>
+					<filter_rule  exp="file != 'msn.htm'"/>
+				</filter_rule>
+		</activity>		
+		<activity  type="classify" id="1" prev_id="0">
+			<filter_rule  exp="file != 'right.htm'"/>
+		</activity>
+		<activity type="collect" unique="ip" output="true">
+		</activity>
+	</task>
+</root>

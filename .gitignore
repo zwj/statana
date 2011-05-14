@@ -1,0 +1,10 @@
+*.o
+*.a
+*.so
+*.swp
+bin/*
+.svn
+infrastructures/improve_src/build/bin/
+subsystems/Stat/build/bin/
+subsystems/split_merger/build/bin/
+

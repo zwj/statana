@@ -1,0 +1,92 @@
+local root = [ modules.peek : LOG_HOME ] ; 
+local home = [ modules.peek : HOME ] ; 
+
+Version = 1$(.)3 ;
+
+dendentLib = //date_time
+			;
+			
+project split_merger
+		: usage-requirements <library>../../libraries/$(dependentLib)
+		;
+
+
+libs_path = ../../../libraries ;
+libs_lib =
+    $(libs_path)//log4cpp
+    $(libs_path)//file_sys
+    $(libs_path)//regex
+    $(libs_path)//system
+    ;
+
+
+infra_path = ../../../infrastructures  ;	
+infra_lib = 
+    $(infra_path)/improve_src/build//improve
+    ;
+
+need_lib = 
+	$(libs_lib)
+    $(infra_lib)
+	;
+
+test_lib = 
+     $(need_lib)
+     $(libs_path)//unit_test
+     ;
+
+commonSrc = 
+    ../file_set.cpp
+    ../line_assembler.cpp
+    ../shared.cpp
+    ;
+
+splitterSrc =
+    ../splitter.cpp
+    ../splitter_main.cpp
+    ;
+
+mergerSrc =
+    ../merger.cpp
+    ../merger_main.cpp
+    ;
+
+testSrc =
+    ../test/merger_test.cpp
+    ../test/test_main.cpp
+    #../test/fileset_test.cpp
+    ../file_set.cpp
+    ../line_assembler.cpp
+    ../shared.cpp
+    ../merger.cpp
+    ;
+
+
+#exe result_splitter
+#    : $(splitterSrc) $(commonSrc) $(need_lib)
+#    : <link>static
+#    ;
+
+exe result_merger
+    : $(mergerSrc) $(commonSrc) $(need_lib)
+    : <link>static
+    ;
+
+exe split_merger_test
+    : $(testSrc) $(test_lib) 
+    : <link>static
+	;
+
+
+stage dist
+    : result_merger split_merger_test 
+    : <location>$(root)/bin/
+    ;
+
+
+#stage dist
+#    : result_splitter result_merger split_merger_test
+#    : result_splitter result_merger
+#    : <location>$(root)/bin/
+#    ;
+

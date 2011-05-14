@@ -1,0 +1,45 @@
+local root = [ modules.peek : LOG_HOME ] ; 
+local home = [ modules.peek : HOME ] ; 
+dendentLib = //date_time
+			;
+			
+project logic 
+		: usage-requirements <library>../../libraries/$(dependentLib)
+		;
+
+libs_path = ../../../libraries ;
+libs_lib =
+    $(libs_path)//log4cpp
+	$(libs_path)//date_time
+	$(libs_path)//regex
+	$(libs_path)//file_sys
+    $(libs_path)//system
+    #$(libs_path)//boost_system
+    ;
+	
+infra_path = ../../../infrastructures  ;	
+
+infra_lib = 
+			$(infra_path)/improve_src/build//improve
+			;
+
+com_path  = ../../../components ;
+com_lib   = 
+			$(com_path)/entity_src/build//entity
+			$(com_path)/logic_src/build//logic
+			;
+
+need_lib = 
+	$(libs_lib)
+	$(infra_lib)
+	$(com_lib)
+	;
+	
+
+exe stat_wlog
+	: ../main.cpp ../common.cpp $(need_lib)
+    : <link>static
+	;
+
+stage dist : stat_wlog  : <location>$(root)/bin/ ;
+

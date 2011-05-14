@@ -1,0 +1,25 @@
+      weblog_parse - extract specified fields from a web log file
+
+Reads a web server log file, in either "Common Logfile Format" or
+"Combined Logfile Format".  Parses it, and writes out only the
+user-specified fields, separated by tabs for easier handling.
+
+This is intended as a utility for writing web-log statistics
+generators.  It's written in C and is very fast.
+
+In addition to just extracting specified fields, the program can
+also do some simple database-like conditional matching.
+
+See the manual entry for more details.
+
+Files in this distribution:
+
+    README		this
+    Makefile		guess
+    weblog_parse.c	source file
+    weblog_parse.1	manual entry
+
+Feedback is welcome - send bug reports, enhancements, checks, money
+orders, etc. to the addresses below.
+
+    Jef Poskanzer  jef@mail.acme.com  http://www.acme.com/jef/

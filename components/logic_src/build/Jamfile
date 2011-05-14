@@ -1,0 +1,78 @@
+local root = [ modules.peek : LOG_HOME ] ; 
+local home = [ modules.peek : HOME ] ; 
+dendentLib = //date_time
+			;
+			
+project logic 
+		: usage-requirements <library>../../libraries/$(dependentLib)
+		;
+
+LibSource = 
+			src/rule_factory.cpp
+			src/activity_factory.cpp
+			src/activity.cpp
+			src/div_activity.cpp
+			src/load_activity.cpp
+			src/stat_activity.cpp
+			src/input.cpp
+			src/data_board.cpp
+			src/task.cpp
+			src/task_manager.cpp
+            src/logic_base.cpp
+            src/matcher_geter.cpp
+			;
+
+TestSource = 			
+			test/rule_factory_test.cpp
+			test/activity_test.cpp
+			test/activity_factory_test.cpp
+			test/task_test.cpp
+			test/task_manager_test.cpp
+			test/logic_support.cpp
+			../entity_src/test/entity_support.cpp
+			test/test_main.cpp
+			;
+			
+
+lib logic 
+	: ../$(LibSource)
+	: <link>static 
+	;
+
+libs_path = ../../../libraries ;
+libs_lib =
+	$(libs_path)//cppunit
+	$(libs_path)//log4cpp
+	$(libs_path)//date_time
+	$(libs_path)//regex
+	$(libs_path)//file_sys
+	#$(libs_path)//boost_system
+	;	
+	
+infra_path = ../../../infrastructures  ;	
+
+infra_lib = 
+			$(infra_path)/improve_src/build//improve
+			;
+
+com_path  = ../../ ;
+com_lib   = 
+			$(com_path)/entity_src/build//entity
+			;
+
+need_lib = 
+	$(libs_lib)
+	$(infra_lib)
+	$(com_lib)
+	logic
+	
+	;
+	
+#exe logic_test 
+#	: ../$(TestSource) $(need_lib)
+#    : <link>static
+##	;
+
+	
+
+#stage dist : logic_test : <location>$(root)/bin/ ;

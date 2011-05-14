@@ -1,0 +1,48 @@
+project libraries
+    :  ; 
+
+home = [ modules.peek : HOME ] ; 
+libpath = /usr/local/lib ;
+libver = .a ;
+
+lib cppunit
+	:
+	: <file>/usr/lib/libcppunit.a 
+	;
+
+lib log4cpp
+	:
+	: <file>/usr/lib/liblog4cpp.a  
+	;
+
+lib regex
+	:
+	: <file>$(libpath)/libboost_regex$(libver) 
+	;
+
+lib	date_time 
+	:
+	: <file>$(libpath)/libboost_date_time$(libver)
+	;
+	
+lib file_sys
+	:
+	: <file>$(libpath)/libboost_filesystem$(libver)
+	;	
+
+lib unit_test
+    :
+    : <file>$(libpath)/libboost_unit_test_framework$(libver) 
+    ;
+
+lib test_exec
+    :
+    : <file>$(libpath)/libboost_test_exec_monitor$(libver) 
+    ;
+
+lib system
+	:
+	: <file>$(libpath)/libboost_system$(libver)  
+	;	
+
+

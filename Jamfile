@@ -1,0 +1,24 @@
+import modules ;
+local root = [ modules.peek : LOG_HOME ] ;
+local home = [ modules.peek : HOME ] ;
+
+project logs
+        : requirements <include>/usr/local/include/
+        : requirements <include>/usr/include
+        : requirements <include>$(root)/libraries
+        : requirements <include>$(root)/infrastructures
+        : requirements <include>$(root)/components
+        : default-build <threading>multi
+          <cxxflags>-D_REENTRANT
+          <cxxflags>-O3
+          <cxxflags>-finline-functions
+          <cxxflags>-funroll-loops
+        ;
+        
+build-project libraries ;
+build-project infrastructures/improve_src/build ;
+build-project components/entity_src/build ;
+build-project components/logic_src/build ;
+build-project subsystems/Stat/build ;
+build-project subsystems/split_merger/build ;
+

@@ -1,0 +1,305 @@
+log=$LOG_HOME CD=. filter="ChangeLog *.h *.cpp *.c Makefile Jamfile *.jam *.conf *.vim *.sh" in=.prj/in.vim {
+ ChangeLog
+ Jamfile
+ boost-build.jam
+ project-root.jam
+ env_setup.sh
+ build.sh
+ components=components {
+  entity=entity {
+   addition_dim.h
+   apache_anar.h
+   args_dimension.h
+   base_anar.h
+   common.h
+   dimension.h
+   dimension_def.h
+   dimension_factory.h
+   dimension_rule.h
+   entity_base.h
+   group_dim.h
+   ip.h
+   log_analyser.h
+   log_item.h
+   matcher.h
+   matcher_def.h
+   null_dimension.h
+   simple_dim.h
+   str_dimension.h
+   utility.h
+   vector_dim.h
+   xml_utility.h
+  }
+  entity_src=entity_src {
+   build=build {
+    Jamfile
+   }
+   src=src {
+    addition_dim.cpp
+    apache_anar.cpp
+    args_dimension.cpp
+    base_anar.cpp
+    dimension.cpp
+    dimension_factory.cpp
+    entity_base.cpp
+    group_dim.cpp
+    ip.cpp
+    log_item.cpp
+    matcher.cpp
+    null_dimension.cpp
+    simple_dim.cpp
+    str_dimension.cpp
+    utility.cpp
+    xml_utility.cpp
+   }
+   test=test {
+    dim_factory_test.h
+    dimension_rule_test.h
+    dimension_test.h
+    entity_support.h
+    log_item_test.h
+    utility_test.h
+    dim_factory_test.cpp
+    dimension_rule_test.cpp
+    dimension_test.cpp
+    entity_support.cpp
+    log_item_test.cpp
+    test_main.cpp
+    utility_test.cpp
+    entity_test.cpp
+   }
+  }
+  logic=logic {
+   activity.h
+   activity_factory.h
+   collect_activity.h
+   common.h
+   config_error.h
+   data_board.h
+   data_loader.h
+   div_activity.h
+   filter.h
+   filter_rule.h
+   input.h
+   load_activity.h
+   logic_base.h
+   matcher_geter.h
+   rule_factory.h
+   stat_activity.h
+   task.h
+   task_manager.h
+  }
+  logic_src=logic_src {
+   build=build {
+    Jamfile
+    stat-union.conf
+    stat.conf
+   }
+   src=src {
+    activity.cpp
+    activity_factory.cpp
+    collect_activity.cpp
+    data_board.cpp
+    data_loader.cpp
+    div_activity.cpp
+    input.cpp
+    load_activity.cpp
+    logic_base.cpp
+    matcher_geter.cpp
+    rule_factory.cpp
+    stat_activity.cpp
+    task.cpp
+    task_manager.cpp
+   }
+   test=test {
+    activity_factory_test.h
+    activity_test.h
+    logic_support.h
+    rule_factory_test.h
+    task_manager_test.h
+    task_test.h
+    test_base.h
+    top_logic_test.h
+    activity_factory_test.cpp
+    activity_test.cpp
+    logic_support.cpp
+    rule_factory_test.cpp
+    task_manager_test.cpp
+    task_test.cpp
+    test_base.cpp
+    test_main.cpp
+    top_logic_test.cpp
+   }
+  }
+  test=test {
+   test_base.h
+  }
+ }
+ config=config {
+  log_stat=log_stat {
+   click_stat.conf
+   pv_stat.conf
+  }
+ }
+ infrastructures=infrastructures {
+  improve=improve {
+   dbc.h
+   env_config.h
+   performance_time.h
+   rule.h
+   scope_guard.h
+   status.h
+   time.h
+   time_period.h
+   utility.h
+   design_by_contract=design_by_contract {
+    dbc.h
+   }
+   exception=exception {
+    exception_handler.h
+   }
+   exception_safe=exception_safe {
+    action.h
+    assignment.h
+    function_call.h
+    scope_guard.h
+   }
+   net=net {
+    url_parser.h
+   }
+   rule_express=rule_express {
+    logic_express.h
+    rule_express.h
+   }
+   status_machine=status_machine {
+    status_machine.h
+   }
+   time=time {
+    performance_time.h
+    self_time.h
+    time_period.h
+   }
+   utility=utility {
+    args_analyze.h
+    exception_def.h
+    utility.h
+   }
+  }
+  improve_src=improve_src {
+   build=build {
+    Jamfile
+   }
+   design_by_contract=design_by_contract {
+    dbc.cpp
+   }
+   exception=exception {
+    exception_handler.cpp
+   }
+   net=net {
+    url_parser.cpp
+   }
+   status_machine=status_machine {
+    status_machine.cpp
+   }
+   test=test {
+    ao_pattern_testcase.h
+    args_analyze_test.h
+    depository_testcase.h
+    read_write_mutex_testcase.h
+    rule_express_test.h
+    service_testcase.h
+    singleton_testcase.h
+    status_machine_test.h
+    test_support.h
+    url_parser_test.h
+    ao_pattern_testcase.cpp
+    args_analyze_test.cpp
+    depository_testcase.cpp
+    read_write_mutex_testcase.cpp
+    rule_express_test.cpp
+    service_testcase.cpp
+    singleton_testcase.cpp
+    status_machine_test.cpp
+    test_main.cpp
+    url_parser_test.cpp
+   }
+   time=time {
+    performance_time.cpp
+    performance_time_unix.cpp
+   }
+   utility=utility {
+    args_analyze.cpp
+    performance_time.cpp
+    performance_time_unix.cpp
+    utility.cpp
+   }
+  }
+ }
+ libraries=libraries {
+  Jamfile
+ }
+ project=.prj filter="*"{
+  cscope.files
+  in.vim
+  out.txt
+  sgit.sh
+  srcindex.sh
+ }
+ subsystems=subsystems {
+  Stat=Stat {
+   common.h
+   common.cpp
+   main.cpp
+   build=build {
+    Jamfile
+    stat.conf
+   }
+  }
+  split_merger=split_merger {
+   ChangeLog
+   file_set.h
+   line_assembler.h
+   log_def.h
+   merger.h
+   merger_ex.h
+   shared.h
+   splitter.h
+   file_set.cpp
+   line_assembler.cpp
+   merger.cpp
+   merger_main.cpp
+   shared.cpp
+   splitter.cpp
+   splitter_main.cpp
+   build=build {
+    Jamfile
+   }
+   test=test {
+    fileset_test.h
+    fileset_test.cpp
+    merger_test.cpp
+    test_main.cpp
+    data=data filter="*.*" {
+     count.rst
+     count_gt_5.rst
+     f_count.rst
+     f_count_gt_5.rst
+     f_sum.rst
+     f_sum_gt_5.rst
+     pv_test_0.stat
+     pv_test_1.stat
+     pv_test_2.stat
+     sum.rst
+     sum_gt_5.rst
+    }
+   }
+  }
+ }
+ tools=tools {
+  merger.sh
+  weblog_parse=weblog_parse {
+   weblog_parse.c
+   Makefile
+  }
+ }
+}

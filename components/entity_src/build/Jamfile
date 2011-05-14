@@ -1,0 +1,75 @@
+local root = [ modules.peek : LOG_HOME ] ; 
+local home = [ modules.peek : HOME ] ; 
+
+dendentLib = //date_time
+			;
+			
+project entity 
+		: usage-requirements <library>../../libraries/$(dependentLib)
+		;
+
+LibSource = 
+			src/args_dimension.cpp
+			src/entity_base.cpp
+			src/str_dimension.cpp
+		    src/utility.cpp
+			src/dimension_factory.cpp
+			src/log_item.cpp
+			src/dimension.cpp
+			src/matcher.cpp
+			src/ip.cpp
+			src/null_dimension.cpp
+            src/group_dim.cpp
+            src/addition_dim.cpp
+            src/simple_dim.cpp
+            src/apache_anar.cpp
+            src/base_anar.cpp
+			;
+
+TestSource = 			
+			test/entity_support.cpp
+			test/entity_test.cpp
+			;
+			
+
+lib entity 
+	: ../$(LibSource)
+	: <link>static 
+    : <linkflags>-pthread
+	;
+
+libs_path = ../../../libraries ;
+libs_lib =
+	$(libs_path)//cppunit
+	$(libs_path)//log4cpp
+	$(libs_path)//date_time
+	$(libs_path)//regex
+	#$(libs_path)//boost_system
+	;	
+	
+infra_path = ../../../infrastructures  ;	
+
+infra_lib = 
+			$(infra_path)/improve_src/build//improve
+			;
+
+
+need_lib = 
+	$(libs_lib)
+	$(infra_lib)
+	entity
+	;
+	
+test_lib = 
+     $(need_lib)
+     $(libs_path)//unit_test
+     ;
+
+#exe entity_test 
+#	: ../$(TestSource) $(test_lib)
+#    : <link>static
+#	;
+
+
+
+#stage dist :  entity_test : <location>$(root)/bin/ ;
